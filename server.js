@@ -37,6 +37,14 @@ app.use(
   })
 );
 
+// 정적 파일 서빙 설정
+app.use(express.static(path.join(__dirname, './public')));
+
+// 기본 경로('/')로 접속 시 index.html 제공
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public', 'index.html'));
+});
+
 // Passport 초기화
 app.use(passport.initialize());
 app.use(passport.session());
