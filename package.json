@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "atoketomanager-backend",
   "version": "1.0.0",
   "scripts": {
@@ -30,22 +29,4 @@
   },
   "main": "web.js",
   "description": ""
-=======
-  "name": "myapp",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "chokidar": "^3.5.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "nunjucks": "^3.2.3",
-    "pug": "^3.0.2"
-  }
->>>>>>> 511c7f2d086ed7e47d4b56a1de369477a4a3a103
 }
