@@ -7,7 +7,7 @@ const passport = require("passport");
 const cors = require("cors");
 const configurePassport = require("./config/passportConfig"); // ✅ 패스포트 설정 파일 불러오기
 const path = require("path");
-const db = require('./config/db'); // DB 연결 파일
+const productsRouter = require('./routes/productsRoutes');
 
 console.log(`Loaded env file: ${envFile}`);
 console.log(`Current ENV: ${process.env.NODE_ENV}`);
@@ -18,6 +18,11 @@ configurePassport();
 // Express 서버 생성
 const app = express();
 const PORT = process.env.SERVER_PORT;
+
+// 미들웨어 설정
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // 정적 파일 서빙
 
 // CORS 설정
 app.use(
@@ -33,9 +38,14 @@ app.use(
     secret: process.env.KAKAO_CLIENT_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { httpOnly: true, secure: false }, // ✅ HTTPS 환경에서는 secure: true 설정
+    cookie: { 
+      httpOnly: true, 
+      secure: process.env.NODE_ENV === 'production' 
+    },
   })
 );
+
+
 
 // 정적 파일 서빙 설정
 app.use(express.static(path.join(__dirname, './public')));
@@ -63,6 +73,7 @@ app.use("/kakao", kakaoRoutes);
 app.use("/user", userRoutes);
 app.use("/logout", logoutRoutes);
 app.use('/items', itemsRouter); // 라우트 적용
+app.use('/products', productsRouter);
 
 
 // 서버 실행
