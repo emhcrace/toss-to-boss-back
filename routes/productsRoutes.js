@@ -54,7 +54,7 @@ router.post('/', authMiddleware, upload.single('image_url'), async (req, res) =>
     }
 
     const sql = `
-      INSERT INTO product_list (name, status, company, branch, image_url, category, price, unit, supplier)
+      INSERT INTO products (name, status, company, branch, image_url, category, price, unit, supplier)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
     
