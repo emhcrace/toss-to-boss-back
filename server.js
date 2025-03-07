@@ -37,10 +37,11 @@ app.use(
   session({
     secret: process.env.KAKAO_CLIENT_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false, // ✅ 로그인한 사용자만 세션 저장
     cookie: { 
       httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production' 
+      secure: process.env.NODE_ENV === 'production' ? true : false, // ✅ 개발 환경에서는 false
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax' // ✅ 크로스 도메인 지원
     },
   })
 );
